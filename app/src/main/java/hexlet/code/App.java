@@ -14,6 +14,7 @@ import java.util.concurrent.Callable;
 public class App implements Callable<Integer> {
 
     private static final int SUCCESS_EXIT_CODE = 0;
+    private static final int ERROR_EXIT_CODE = 1;
 
     @CommandLine.Parameters(index = "0", description = "path to first file")
     private String filepath1;
@@ -28,6 +29,12 @@ public class App implements Callable<Integer> {
     @Override
     public Integer call() {
         System.out.printf("Comparing '%s' with '%s' using format '%s'%n", filepath1, filepath2, format);
+        try {
+            System.out.println(Differ.generate(filepath1, filepath2));
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return ERROR_EXIT_CODE;
+        }
         return SUCCESS_EXIT_CODE;
     }
 
