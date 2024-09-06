@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Differ {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private static Map<String, Object> parseData(String filePath) throws Exception {
         Path fullPath = Paths.get(filePath).toAbsolutePath().normalize();
@@ -18,7 +18,7 @@ public class Differ {
         }
 
         String content = Files.readString(fullPath);
-        return mapper.readValue(content, Map.class);
+        return MAPPER.readValue(content, Map.class);
     }
 
     public static String generate(String filePath1, String filePath2) throws Exception {

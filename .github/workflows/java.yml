@@ -1,0 +1,24 @@
+name: java-ci
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up openJDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name:  Make gradlew executable
+        run: |
+          cd ./app/
+          chmod +x ./gradlew
+      - name: Build with Gradle
+        run: |
+          cd ./app/
+          make build
