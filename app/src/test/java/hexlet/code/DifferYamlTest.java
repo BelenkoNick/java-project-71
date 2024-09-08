@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class DifferTest {
+class DifferYamlTest {
 
     @Test
-    void testGenerateWithIdenticalFiles() throws Exception {
-        String filePath1 = "src/test/resources/identical1.json";
-        String filePath2 = "src/test/resources/identical2.json";
+    void testGenerateWithIdenticalYamlFiles() throws Exception {
+        String filePath1 = "src/test/resources/identical1.yaml";
+        String filePath2 = "src/test/resources/identical2.yaml";
 
         String expected = "{\n"
                 + "    host: hexlet.io\n"
@@ -23,9 +23,9 @@ class DifferTest {
     }
 
     @Test
-    void testGenerateWithDifferentFiles() throws Exception {
-        String filePath1 = "src/test/resources/different1.json";
-        String filePath2 = "src/test/resources/different2.json";
+    void testGenerateWithDifferentYamlFiles() throws Exception {
+        String filePath1 = "src/test/resources/different1.yaml";
+        String filePath2 = "src/test/resources/different2.yaml";
 
         String expected = "{\n"
                 + "  - follow: false\n"
@@ -41,9 +41,9 @@ class DifferTest {
     }
 
     @Test
-    void testGenerateWithMissingFile() {
-        String filePath1 = "src/test/resources/existing.json";
-        String filePath2 = "src/test/resources/non_existing.json";
+    void testGenerateWithMissingYamlFile() {
+        String filePath1 = "src/test/resources/existing.yaml";
+        String filePath2 = "src/test/resources/non_existing.yaml";
 
         Exception exception = assertThrows(Exception.class, () -> {
             Differ.generate(filePath1, filePath2);
@@ -51,8 +51,6 @@ class DifferTest {
 
         String expectedMessage = " does not exist.";
         String actualMessage = exception.getMessage();
-        System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
     }
 }
-
