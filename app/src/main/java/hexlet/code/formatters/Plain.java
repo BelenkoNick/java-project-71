@@ -5,29 +5,27 @@ import hexlet.code.enums.ChangesType;
 import java.util.Map;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.function.Function;
 
 public class Plain {
 
     public static String render(List<Map<String, Object>> diff) {
-        Function<Map<String, Object>, String> stringifyNode = node -> {
-            ChangesType type = (ChangesType) node.get("type");
-            String key = (String) node.get("key");
-            String formattedValue = stringify(node.get("value"));
-            String formattedValue1 = stringify(node.get("value1"));
-            String formattedValue2 = stringify(node.get("value2"));
-
-            return switch (type) {
-                case ADDED -> "Property '" + key + "' was added" + " with value: " + formattedValue;
-                case DELETED -> "Property '" + key + "' was removed";
-                case CHANGED -> "Property '" + key + "' was updated."
-                        + " From " + formattedValue1 + " to " + formattedValue2;
-                case UNTOUCHED -> "";
-            };
-        };
-
         return diff.stream()
-                .map(stringifyNode)
+                .map(node -> {
+                    ChangesType type = (ChangesType) node.get("type");
+                    String key = (String) node.get("key");
+
+                    String formattedValue = stringify(node.get("value"));
+                    String formattedValue1 = stringify(node.get("value1"));
+                    String formattedValue2 = stringify(node.get("value2"));
+
+                    return switch (type) {
+                        case ADDED -> "Property '" + key + "' was added" + " with value: " + formattedValue;
+                        case DELETED -> "Property '" + key + "' was removed";
+                        case CHANGED -> "Property '" + key + "' was updated."
+                                + " From " + formattedValue1 + " to " + formattedValue2;
+                        case UNTOUCHED -> "";
+                    };
+                })
                 .filter(line -> !line.isEmpty())
                 .collect(Collectors.joining("\n"));
     }

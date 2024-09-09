@@ -110,5 +110,30 @@ class DifferJsonTest {
         String result = Differ.generate(filePath1, filePath2, "plain");
         assertEquals(expected, result);
     }
+
+    @Test
+    void testGenerateWithComplexNestedFilesJsonFormat() throws Exception {
+        String filePath1 = "src/test/resources/complex1.json";
+        String filePath2 = "src/test/resources/complex2.json";
+
+        String expected = "[{\"type\":\"UNTOUCHED\",\"value\":[\"a\",\"b\",\"c\"],\"key\":\"chars1\"},"
+                + "{\"value2\":false,\"value1\":[\"d\",\"e\",\"f\"],\"type\":\"CHANGED\",\"key\":\"chars2\"},"
+                + "{\"value2\":true,\"value1\":false,\"type\":\"CHANGED\",\"key\":\"checked\"},"
+                + "{\"value2\":[\"value1\",\"value2\"],\"value1\":null,\"type\":\"CHANGED\",\"key\":\"default\"},"
+                + "{\"value2\":null,\"value1\":45,\"type\":\"CHANGED\",\"key\":\"id\"},"
+                + "{\"type\":\"DELETED\",\"value\":\"value1\",\"key\":\"key1\"},"
+                + "{\"type\":\"ADDED\",\"value\":\"value2\",\"key\":\"key2\"},"
+                + "{\"type\":\"UNTOUCHED\",\"value\":[1,2,3,4],\"key\":\"numbers1\"},"
+                + "{\"value2\":[22,33,44,55],\"value1\":[2,3,4,5],\"type\":\"CHANGED\",\"key\":\"numbers2\"},"
+                + "{\"type\":\"DELETED\",\"value\":[3,4,5],\"key\":\"numbers3\"},"
+                + "{\"type\":\"ADDED\",\"value\":[4,5,6],\"key\":\"numbers4\"},"
+                + "{\"type\":\"ADDED\",\"value\":{\"nestedKey\":\"value\",\"isNested\":true},\"key\":\"obj1\"},"
+                + "{\"value2\":\"Another value\",\"value1\":\"Some value\",\"type\":\"CHANGED\",\"key\":\"setting1\"},"
+                + "{\"value2\":300,\"value1\":200,\"type\":\"CHANGED\",\"key\":\"setting2\"},"
+                + "{\"value2\":\"none\",\"value1\":true,\"type\":\"CHANGED\",\"key\":\"setting3\"}]";
+
+        String result = Differ.generate(filePath1, filePath2, "json");
+        assertEquals(expected, result);
+    }
 }
 

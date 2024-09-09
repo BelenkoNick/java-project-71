@@ -7,3 +7,4 @@
 ![differYaml.png](app/src/main/resources/img2.png)
 ![differComplex.png](app/src/main/resources/imgComplex.png)
 ![differPlain.png](app/src/main/resources/imgPlain.png)
+![differJson.png](app/src/main/resources/imgJson.png)
