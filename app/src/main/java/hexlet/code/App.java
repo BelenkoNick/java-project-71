@@ -29,7 +29,6 @@ public final class App implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        System.out.printf("Comparing '%s' with '%s' using format '%s'%n", filepath1, filepath2, format);
         try {
             System.out.println(Differ.generate(filepath1, filepath2, format));
         } catch (Exception e) {

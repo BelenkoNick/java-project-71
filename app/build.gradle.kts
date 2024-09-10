@@ -1,5 +1,6 @@
 plugins {
     application
+    jacoco
     checkstyle
 }
 
@@ -26,4 +27,10 @@ application {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
 }
